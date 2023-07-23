@@ -1,0 +1,23 @@
+# iOS Learning Projects
+
+This repository contains a collection of my interactive iOS app projects created as part of my learning journey in iOS app development. Each project is built using Swift and the UIKit framework. The purpose of this repository is to document my progress and development as I explore various iOS app concepts.
+
+## Project List
+
+<!-- 1. **Todo List App**: A simple to-do list app that allows users to add, delete, and mark tasks as complete.
+ -->
+
+## How to Use
+
+Each project folder contains its own README with specific instructions on how to run the app and any additional details. Feel free to explore each project and provide feedback or suggestions.
+
+## Requirements
+
+- Xcode 12.0 or higher
+- Swift 5.0 or higher
+
+## Author
+
+Arkadiusz Plumbaum - [GitHub](https://github.com/arekpl28)
+
+
