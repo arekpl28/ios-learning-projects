@@ -4,8 +4,7 @@ This repository contains a collection of my interactive iOS app projects created
 
 ## Project List
 
-<!-- 1. **Todo List App**: A simple to-do list app that allows users to add, delete, and mark tasks as complete.
- -->
+1. **L1 Demo**: This SwiftUI project, named "L1 Demo," displays an image of the iconic Niagara Falls. The image is presented in a black background, enhancing its visual impact. The title "Niagara Falls" is displayed on top of the image with a large and bold font in white color, adding context to the displayed content.
 
 ## How to Use
 
@@ -19,5 +18,3 @@ Each project folder contains its own README with specific instructions on how to
 ## Author
 
 Arkadiusz Plumbaum - [GitHub](https://github.com/arekpl28)
-
-
