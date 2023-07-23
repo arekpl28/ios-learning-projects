@@ -10,23 +10,27 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         
+        // ZStack - A container that overlays its children views on top of each other.
         ZStack {
+            // Color - A view that represents a solid color.
             Color(.black)
-                .ignoresSafeArea()
+                .ignoresSafeArea() // Fills the whole screen with black color, ignoring the safe area
             
+            // VStack - A container that arranges its children views in a vertical stack.
             VStack {
-                Image("niagarafalls")
-                    .resizable()
-                    .cornerRadius(15)
-                    .aspectRatio(contentMode: .fit)
-                    .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                // Image - A view that displays an image.
+                Image("niagarafalls") // Adds an image with the name "niagarafalls" from the app's resources
+                    .resizable() // Makes the image resizable to fit the available space
+                    .cornerRadius(15) // Rounds the corners of the image with a radius of 15 points
+                    .aspectRatio(contentMode: .fit) // Sets the aspect ratio of the image to fit the available space while maintaining its aspect ratio
                 
-                Text("Niagara Falls")
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.white)
+                // Text - A view that displays a text.
+                Text("Niagara Falls") // Adds a text view with the text "Niagara Falls"
+                    .font(.largeTitle) // Sets the font size to large title
+                    .fontWeight(.semibold) // Sets the font weight to semibold (slightly bolder than regular)
+                    .foregroundColor(Color.white) // Sets the text color to white
             }
-        }
+        }        
     }
 }
 
