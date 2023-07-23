@@ -1,0 +1,63 @@
+# L1 Demo
+
+![Niagara Falls](niagarafalls.jpg)
+
+A simple SwiftUI demo project showcasing an image of Niagara Falls with a large title overlay.
+
+## Description
+
+This SwiftUI project, named "L1 Demo," displays an image of the iconic Niagara Falls. The image is presented in a black background, enhancing its visual impact. The title "Niagara Falls" is displayed on top of the image with a large and bold font in white color, adding context to the displayed content.
+
+## Usage
+
+To use this project, you can follow these steps:
+
+1. Clone the repository to your local machine.
+2. Open the project in Xcode.
+3. Build and run the project on a simulator or a real iOS device.
+
+## Requirements
+
+- Xcode 12.0 or later
+- SwiftUI framework
+
+## Credits
+
+This project is created by Arkadiusz Plumbaum.
+
+## License
+
+This project is open-source and available under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## ContentView.swift
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        ZStack {
+            Color(.black)
+                .ignoresSafeArea()
+            
+            VStack {
+                Image("niagarafalls")
+                    .resizable()
+                    .cornerRadius(15)
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.all)
+                
+                Text("Niagara Falls")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.white)
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
