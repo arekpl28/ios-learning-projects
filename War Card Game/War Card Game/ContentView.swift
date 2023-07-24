@@ -9,6 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     // The variables to store card names and scores
+    @State var gameBackground = "background1"
+    @State var gameBackgroundMini = "background2"
+    @State var numBackground = 1
+    @State var numBackgroundMini = 2
+    
     @State var playerCard = "back"
     @State var cpuCard = "back"
     
@@ -22,9 +27,19 @@ struct ContentView: View {
         
         ZStack {
             // Image as Background
-            Image("background-plain")
+            Image(gameBackground)
                 .resizable() // Makes the background image resizable to fit the available space
                 .ignoresSafeArea() // Ignores the safe area of the screen, filling the whole screen with the background image
+            VStack {
+                Button {
+                    changeBackground()
+                } label: {
+                    Image(gameBackgroundMini)
+                        .resizable()
+                        .frame(width: 30.0, height: 60.0)
+                    
+                }.cornerRadius(6)
+            }.position(.init(x: 380, y: 30))
             
             VStack {
                 Spacer()
@@ -80,6 +95,20 @@ struct ContentView: View {
             }
         }
     }
+    // Function to change background
+    func changeBackground() {
+        numBackground += 1
+        numBackgroundMini += 1
+        
+        if numBackground == 5 {
+            numBackground = 1
+        } else if numBackgroundMini == 5 {
+            numBackgroundMini = 1
+        }
+        gameBackground = "background" + String(numBackground)
+        gameBackgroundMini = "background" + String(numBackgroundMini)
+    }
+    
     // Function to deal cards
     func deal() {
         // Randomize the players card
