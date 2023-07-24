@@ -8,7 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    // The variables to store card names and scores
+    var playerCard = "card7"
+    var cpuCard = "card6"
+    
+    var playerScore:Int = 0
+    var cpuScore:Int = 0
+    
     var body: some View {
+        
         ZStack {
             // Image as Background
             Image("background-plain")
@@ -24,14 +32,19 @@ struct ContentView: View {
                 // HStack to Display Two Cards Horizontally
                 HStack {
                     Spacer()
-                    Image("card2")
+                    Image(playerCard)
                     Spacer()
-                    Image("card3")
+                    Image(cpuCard)
                     Spacer()
                 }
                 Spacer()
                 // Button Image
-                Image("button")
+                
+                Button {
+                    deal()
+                } label: {
+                    Image("button")
+                }
                 
                 Spacer()
                 // HStack to Display Player and CPU Information
@@ -42,7 +55,7 @@ struct ContentView: View {
                         Text("Player")
                             .font(.headline) // Sets the font to headline size
                             .padding(.bottom, 10) // Adds padding bottom on the text
-                        Text("0")
+                        Text(String(playerScore))
                             .font(.largeTitle) // Sets the font to large title size
                     }
                     Spacer()
@@ -51,7 +64,7 @@ struct ContentView: View {
                         Text("CPU")
                             .font(.headline)
                             .padding(.bottom, 10) // Adds padding bottom on the text
-                        Text("0")
+                        Text(String(cpuScore))
                             .font(.largeTitle) // Sets the font to large title size
                     }
                     
@@ -61,6 +74,10 @@ struct ContentView: View {
                 Spacer()
             }
         }
+    }
+    // Function to deal cards
+    func deal() {
+        print("Deal cards")
     }
 }
 
