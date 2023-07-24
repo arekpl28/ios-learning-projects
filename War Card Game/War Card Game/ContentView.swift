@@ -9,11 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     // The variables to store card names and scores
-    var playerCard = "card7"
-    var cpuCard = "card6"
+    @State var playerCard = "back"
+    @State var cpuCard = "back"
     
-    var playerScore:Int = 0
-    var cpuScore:Int = 0
+    @State var playerScore:Int = 0
+    @State var cpuScore:Int = 0
+    
+    @State var playerCardValue = 0
+    @State var cpuCardValue = 0
     
     var body: some View {
         
@@ -39,7 +42,6 @@ struct ContentView: View {
                 }
                 Spacer()
                 // Button Image
-                
                 Button {
                     deal()
                 } label: {
@@ -55,8 +57,7 @@ struct ContentView: View {
                         Text("Player")
                             .font(.headline) // Sets the font to headline size
                             .padding(.bottom, 10) // Adds padding bottom on the text
-                        Text(String(playerScore))
-                            .font(.largeTitle) // Sets the font to large title size
+                        Text(String(playerScore)).font(.largeTitle) // Sets the font to large title size
                     }
                     Spacer()
                     
@@ -64,20 +65,31 @@ struct ContentView: View {
                         Text("CPU")
                             .font(.headline)
                             .padding(.bottom, 10) // Adds padding bottom on the text
-                        Text(String(cpuScore))
-                            .font(.largeTitle) // Sets the font to large title size
+                        Text(String(cpuScore)).font(.largeTitle) // Sets the font to large title size
                     }
                     
                     Spacer()
-                }
-                .foregroundColor(.white) // Sets the text color of the player/CPU info to white
+                }.foregroundColor(.white) // Sets the text color of the player/CPU info to white
                 Spacer()
             }
         }
     }
     // Function to deal cards
     func deal() {
-        print("Deal cards")
+        // Randomize the players card
+        playerCardValue = Int.random(in: 2...14)
+        playerCard = "card" + String(playerCardValue)
+        
+        // Randomize the players card
+        cpuCardValue = Int.random(in: 2...14)
+        cpuCard = "card" + String(cpuCardValue)
+        
+        // Update the scores
+        if playerCardValue > cpuCardValue {
+            playerScore += 1
+        } else if playerCardValue < cpuCardValue {
+            cpuScore += 1
+        }
     }
 }
 
