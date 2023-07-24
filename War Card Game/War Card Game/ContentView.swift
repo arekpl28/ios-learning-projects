@@ -71,6 +71,12 @@ struct ContentView: View {
                     Spacer()
                 }.foregroundColor(.white) // Sets the text color of the player/CPU info to white
                 Spacer()
+                
+                Button("Reset") {
+                    resetGame()
+                }
+                .font(.headline)
+                .foregroundColor(.white)
             }
         }
     }
@@ -90,6 +96,13 @@ struct ContentView: View {
         } else if playerCardValue < cpuCardValue {
             cpuScore += 1
         }
+    }
+    
+    func resetGame() {
+        playerCard = "back"
+        cpuCard = "back"
+        playerScore = 0
+        cpuScore = 0
     }
 }
 
