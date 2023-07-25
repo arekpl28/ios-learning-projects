@@ -28,8 +28,32 @@ struct ContentView: View {
                     Text("26°C")
                         .font(.system(size: 70, weight: .medium))
                         .foregroundColor(.white)
-                }
+                    
                     Spacer()
+                    
+                    HStack{
+                        WeatherDayView(dayOfWeek: "TUE",
+                                       imageName: "cloud.sun.fill",
+                                       temperature: 23)
+                        Spacer()
+                        WeatherDayView(dayOfWeek: "WED",
+                                       imageName: "sun.max.fill",
+                                       temperature: 20)
+                        Spacer()
+                        WeatherDayView(dayOfWeek: "THU",
+                                       imageName: "wind",
+                                       temperature: 19)
+                        Spacer()
+                        WeatherDayView(dayOfWeek: "FRI",
+                                       imageName: "cloud.sun.rain.fill",
+                                       temperature: 22)
+                        Spacer()
+                        WeatherDayView(dayOfWeek: "SAT",
+                                       imageName: "cloud.sun.bolt.fill",
+                                       temperature: 25)
+                    }.padding(.horizontal)
+                    Spacer()
+                }
             }
         }
     }
@@ -38,5 +62,28 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct WeatherDayView: View {
+    
+    var dayOfWeek: String
+    var imageName: String
+    var temperature: Int
+    
+    var body: some View {
+        VStack {
+            Text(dayOfWeek)
+                .font(.system(size: 20, weight: .medium, design: .default))
+            
+            Image(systemName: imageName)
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40, height: 40)
+            
+            Text("\(temperature)°")
+                .font(.system(size: 25, weight: .medium, design: .default))
+        }.foregroundColor(.white)
     }
 }
