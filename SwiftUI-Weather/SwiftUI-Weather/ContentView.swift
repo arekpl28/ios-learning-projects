@@ -13,14 +13,12 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            BackgroundView(topColor: isNight ? .black : .blue,
-                           bottomCollor: isNight ? .gray : Color("lightBlue"))
+            BackgroundView(isNight: $isNight)
             
             VStack {
                 CityTextView(cityName: "Cupertino, CA")
                 
-                MainWeatherStatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
-                                      temperature: isNight ? 17 : 26)
+                MainWeatherStatusView(isNight: $isNight)
                 
                 HStack{
                     WeatherDayView(dayOfWeek: "TUE",
@@ -89,12 +87,15 @@ struct WeatherDayView: View {
 }
 
 struct BackgroundView: View {
-    var topColor: Color
-    var bottomCollor: Color
+    
+    @Binding var isNight: Bool
     
     var body: some View {
         
-        LinearGradient(gradient: Gradient(colors: [topColor, bottomCollor]), startPoint: .topLeading, endPoint: .bottomTrailing)
+        LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue,
+                                                   isNight ? .gray : Color("lightBlue")]),
+                       startPoint: .topLeading,
+                       endPoint: .bottomTrailing)
             .edgesIgnoringSafeArea(.all)
     }
 }
@@ -112,18 +113,17 @@ struct CityTextView: View {
 
 struct MainWeatherStatusView: View {
     
-    var imageName: String
-    var temperature: Int
+    @Binding var isNight: Bool
     
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: imageName)
+            Image(systemName: isNight ? "moon.stars.fill" : "cloud.sun.fill")
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 180, height: 180)
             
-            Text("\(temperature)°C")
+            Text("\(isNight ? 17 : 26)°C")
                 .font(.system(size: 70, weight: .medium))
                 .foregroundColor(.white)
         }.padding(.bottom, 40)
