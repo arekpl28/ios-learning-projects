@@ -9,17 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     
+    // State property to control day and night mode
     @State private var isNight = false
     
     var body: some View {
         ZStack {
+            // Background view with gradient colors based on day or night mode
             BackgroundView(isNight: $isNight)
             
             VStack {
+                // Display city name
                 CityTextView(cityName: "Cupertino, CA")
                 
+                // Main weather status with weather icon and temperature
                 MainWeatherStatusView(isNight: $isNight)
                 
+                // Display weather forecast for different days of the week
                 HStack{
                     WeatherDayView(dayOfWeek: "TUE",
                                    imageName: "cloud.sun.fill",
@@ -44,6 +49,7 @@ struct ContentView: View {
                 
                 Spacer()
                 
+                // Button to toggle day and night mode
                 Button {
                     isNight.toggle()
                 } label: {
