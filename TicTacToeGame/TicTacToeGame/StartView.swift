@@ -74,6 +74,8 @@ struct StartView: View {
             Spacer()
         }
         .padding()
+        .navigationTitle("Xs And Os")
+        .inNavigationStack()
         
     }
 }
