@@ -16,6 +16,9 @@ struct StartView: View {
     // State variable to manage focus on text fields
     @FocusState private var focus: Bool
     
+    // State variable to control game start (show GameView)
+    @State private var startGame = false
+    
     var body: some View {
         VStack {
             // Picker to select the game type
@@ -60,6 +63,7 @@ struct StartView: View {
             if gameType != .peer {
                 Button("Start Game") {
                     focus = false
+                    startGame.toggle()
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(
@@ -75,6 +79,9 @@ struct StartView: View {
         }
         .padding()
         .navigationTitle("Xs And Os")
+        .fullScreenCover(isPresented: $startGame, content: {
+            GameView()
+        })
         .inNavigationStack()
         
     }
