@@ -17,14 +17,18 @@ struct ContentView: View {
     // State variable to control the number of visible cards
     @State var emojiCount = 4
     
+    let columns = [GridItem(.adaptive(minimum: 65))] // Define the grid columns
+    
     var body: some View {
         VStack {
-            // Display the cards in a horizontal row
-            HStack {
-                ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
-                    CardView(content: emoji) // Display each card using the CardView
+            ScrollView {
+                // Display the cards in a grid layout
+                LazyVGrid(columns: columns) {
+                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit) // Display each card using the CardView
+                    }
                 }
-            }
+            }.foregroundColor(.red)
             Spacer()
             
             // UI for adding or removing cards
@@ -37,7 +41,7 @@ struct ContentView: View {
             .padding(.horizontal)
         }
         .padding(.horizontal)
-        .foregroundColor(.red)
+        
     }
     
     var remove: some View {
@@ -75,12 +79,11 @@ struct CardView: View {
             if isFaceUp {
                 // Display the front side of the card
                 shape.fill().foregroundColor(.white)
-                shape.stroke(lineWidth: 3)
+                shape.strokeBorder(lineWidth: 3)
                 Text(content).font(.largeTitle)
             } else {
                 // Display the back side of the card
                 shape.fill()
-                shape.stroke(lineWidth: 3)
             }
         }
         .onTapGesture {
