@@ -15,7 +15,7 @@ struct ContentView: View {
     var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "🚢", "🛸", "🛶", "🚌", "🏍️", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🚛", "🛴"]
     
     // State variable to control the number of visible cards
-    @State var emojiCount = 4
+    @State var emojiCount = 20
     
     let columns = [GridItem(.adaptive(minimum: 65))] // Define the grid columns
     
@@ -23,47 +23,15 @@ struct ContentView: View {
         VStack {
             ScrollView {
                 // Display the cards in a grid layout
-                LazyVGrid(columns: columns) {
+                 LazyVGrid(columns: columns) {
                     ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
                         CardView(content: emoji).aspectRatio(2/3, contentMode: .fit) // Display each card using the CardView
                     }
                 }
             }.foregroundColor(.red)
-            Spacer()
-            
-            // UI for adding or removing cards
-            HStack {
-                remove
-                Spacer ()
-                add
-            }
-            .font(.largeTitle)
-            .padding(.horizontal)
         }
         .padding(.horizontal)
         
-    }
-    
-    var remove: some View {
-        // Button to remove a card
-        Button {
-            if emojiCount > 1 {
-                emojiCount -= 1
-            }
-        } label: {
-            Image(systemName: "minus.circle")
-        }
-    }
-    
-    var add: some View {
-        // Button to add a card
-        Button {
-            if emojiCount < emojis.count {
-                emojiCount += 1
-            }
-        } label: {
-            Image(systemName: "plus.circle")
-        }
     }
 }
 
