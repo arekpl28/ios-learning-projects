@@ -11,7 +11,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    let viewModel: EmojiMemoryGame
+    @ObservedObject var viewModel: EmojiMemoryGame
     
     
     let columns = [GridItem(.adaptive(minimum: 65))] // Define the grid columns
@@ -24,6 +24,9 @@ struct ContentView: View {
                 ForEach(viewModel.cards) { card in
                     CardView(card: card)
                         .aspectRatio(2/3, contentMode: .fit) // Display each card using the CardView
+                        .onTapGesture {
+                            viewModel.choose(card)
+                        }
                 }
             }
         }
