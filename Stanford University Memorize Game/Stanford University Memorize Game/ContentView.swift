@@ -11,51 +11,45 @@
 import SwiftUI
 
 struct ContentView: View {
-    // Array of emojis used as card content
-    var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "🚢", "🛸", "🛶", "🚌", "🏍️", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🚛", "🛴"]
+    let viewModel: EmojiMemoryGame
     
-    // State variable to control the number of visible cards
-    @State var emojiCount = 20
     
     let columns = [GridItem(.adaptive(minimum: 65))] // Define the grid columns
     
     var body: some View {
-        VStack {
-            ScrollView {
-                // Display the cards in a grid layout
-                 LazyVGrid(columns: columns) {
-                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
-                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit) // Display each card using the CardView
-                    }
-                }
-            }.foregroundColor(.red)
-        }
-        .padding(.horizontal)
         
+        ScrollView {
+            // Display the cards in a grid layout
+            LazyVGrid(columns: columns) {
+                ForEach(viewModel.cards) { card in
+                    CardView(card: card)
+                        .aspectRatio(2/3, contentMode: .fit) // Display each card using the CardView
+                }
+            }
+        }
+        .foregroundColor(.red)
+        .padding(.horizontal)
     }
 }
 
 // CardView is a custom View to represent a card
 struct CardView: View {
-    var content: String
-    @State var isFaceUp: Bool = true
+    let card: MemoryGame<String>.Card
     
     var body: some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 20)
             
-            if isFaceUp {
+            if card.isFaceUp {
                 // Display the front side of the card
                 shape.fill().foregroundColor(.white)
                 shape.strokeBorder(lineWidth: 3)
-                Text(content).font(.largeTitle)
+                Text(card.content).font(.largeTitle)
             } else {
                 // Display the back side of the card
                 shape.fill()
             }
-        }
-        .onTapGesture {
-            isFaceUp = !isFaceUp // Toggle card face
+            
         }
     }
 }
@@ -63,6 +57,7 @@ struct CardView: View {
 // PreviewProvider for ContentView
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let game = EmojiMemoryGame()
+        ContentView(viewModel: game)
     }
 }
