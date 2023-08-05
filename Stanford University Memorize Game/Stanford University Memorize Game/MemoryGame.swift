@@ -7,18 +7,30 @@
 
 import Foundation
 
+// The MemoryGame structure describes the logic of the memory game.
 struct MemoryGame<CardContent> {
-    var cards: Array<Card>
+    private(set) var cards: Array<Card>
     
     // The choose() function represents a player's card selection.
     func choose(_ card: Card) {
         // Code related to card selection will go here.
     }
     
+    // The initializer to set up the game with pairs of cards.
+    init(numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
+        cards = Array<Card>()
+        // Add numberOfPairsOfCards X 2 cards to the cards array
+        for pairIndex in 0..<numberOfPairsOfCards {
+            let content: CardContent = createCardContent(pairIndex)
+            cards.append(Card(content: content))
+            cards.append(Card(content: content))
+        }
+    }
+    
     // The internal Card structure describes card properties.
     struct Card {
-        var isFaceUp: Bool
-        var isMatched: Bool
+        var isFaceUp: Bool = false
+        var isMatched: Bool = false
         var content: CardContent
     }
 }
