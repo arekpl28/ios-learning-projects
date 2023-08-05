@@ -8,7 +8,7 @@
 import SwiftUI
 
 // The EmojiMemoryGame class defines the main game logic and data.
-class EmojiMemoryGame {
+class EmojiMemoryGame: ObservableObject {
     // A static array of emojis used as card content
     static let emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎️", "🚑", "🚓", "🚒", "✈️", "🚀", "🚢", "🛸", "🛶", "🚌", "🏍️", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🚛", "🛴"]
     
@@ -20,10 +20,16 @@ class EmojiMemoryGame {
     }
     
     // Private instance of MemoryGame created using the createMemoryGame function
-    private var model: MemoryGame<String> = createMemoryGame()
+    @Published private var model: MemoryGame<String> = createMemoryGame()
     
     // Expose the array of cards from the model
     var cards: Array<MemoryGame<String>.Card> {
         return model.cards
+    }
+    
+    // MARK: - Intent(s)
+    
+    func choose(_ card: MemoryGame<String>.Card) {
+        model.choose(card)
     }
 }
