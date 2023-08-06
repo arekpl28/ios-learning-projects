@@ -19,8 +19,9 @@ struct WeatherDayView: View {
                 .font(.system(size: 20, weight: .medium, design: .default))
             
             Image(systemName: imageName)
-                .renderingMode(.original)
+                .symbolRenderingMode(.palette)
                 .resizable()
+                .foregroundStyle(.white, .yellow, .blue)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40, height: 40)
             

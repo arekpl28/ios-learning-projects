@@ -14,8 +14,9 @@ struct MainWeatherStatusView: View {
     var body: some View {
         VStack(spacing: 10) {
             Image(systemName: isNight ? "moon.stars.fill" : "cloud.sun.fill")
-                .renderingMode(.original)
+                .symbolRenderingMode(.palette)
                 .resizable()
+                .foregroundStyle(.white, .yellow)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 180, height: 180)
             

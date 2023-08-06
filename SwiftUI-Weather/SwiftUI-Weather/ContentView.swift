@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             // Background view with gradient colors based on day or night mode
-            BackgroundView(isNight: $isNight)
+            BackgroundView(isNight: isNight)
             
             VStack {
                 // Display city name
