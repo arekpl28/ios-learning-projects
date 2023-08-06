@@ -10,8 +10,11 @@ import Foundation
 // The MemoryGame structure describes the logic of the memory game.
 struct MemoryGame<CardContent> where CardContent: Equatable{
     private(set) var cards: Array<Card>
-    
-    private var indexOfTheOneAndOnlyFaceUpCard: Int?
+    // Index of the one and only face-up card (computed property)
+    private var indexOfTheOneAndOnlyFaceUpCard: Int? {
+        get { cards.indices.filter({ cards[$0].isFaceUp }).oneAndOnly }
+        set { cards.indices.forEach { cards[$0].isFaceUp = ($0 == newValue) } }
+    }
     
     // The choose() function represents a player's card selection.
     mutating func choose(_ card: Card) {
@@ -28,21 +31,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
                 }
-                // Clear the previously face-up card index
-                indexOfTheOneAndOnlyFaceUpCard = nil
+                cards[chosenIndex].isFaceUp = true
             } else {
-                // Flip all cards face-down except the chosen one
-                for index in cards.indices {
-                    cards[index].isFaceUp = false
-                }
-                // Set the chosen card as the one and only face-up card
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
-            // Toggle the chosen card's face-up state
-            cards[chosenIndex].isFaceUp.toggle()
         }
-        // Print the updated cards array for debugging
-        print(cards)
     }
     
     // The initializer to set up the game with pairs of cards.
@@ -62,5 +55,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
         var isMatched = false
         let content: CardContent
         let id: Int
+    }
+}
+
+// Extension to Array to provide a property for a single element
+extension Array {
+    var oneAndOnly: Element? {
+        if count == 1 {
+            return first
+        } else {
+            return nil
+        }
     }
 }
