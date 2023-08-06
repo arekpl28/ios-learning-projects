@@ -8,23 +8,41 @@
 import Foundation
 
 // The MemoryGame structure describes the logic of the memory game.
-struct MemoryGame<CardContent> {
+struct MemoryGame<CardContent> where CardContent: Equatable{
     private(set) var cards: Array<Card>
+    
+    private var indexOfTheOneAndOnlyFaceUpCard: Int?
     
     // The choose() function represents a player's card selection.
     mutating func choose(_ card: Card) {
-        let chosenIndex = index(of: card)
-        cards[chosenIndex].isFaceUp.toggle()
-        print(cards)
-    }
-    
-    func index(of card: Card) -> Int {
-        for index in 0..<cards.count {
-            if cards[index].id == card.id {
-                return index
+        // Find the index of the chosen card in the cards array
+        if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }),
+           !cards[chosenIndex].isFaceUp,
+           !cards[chosenIndex].isMatched
+        {
+            // Check if there's a previously face-up card
+            if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard{
+                // Check if the chosen card matches the previously face-up card
+                if cards[chosenIndex].content == cards[potentialMatchIndex].content {
+                    // Mark both cards as matched
+                    cards[chosenIndex].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                }
+                // Clear the previously face-up card index
+                indexOfTheOneAndOnlyFaceUpCard = nil
+            } else {
+                // Flip all cards face-down except the chosen one
+                for index in cards.indices {
+                    cards[index].isFaceUp = false
+                }
+                // Set the chosen card as the one and only face-up card
+                indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
+            // Toggle the chosen card's face-up state
+            cards[chosenIndex].isFaceUp.toggle()
         }
-        return 0 // bogus!!
+        // Print the updated cards array for debugging
+        print(cards)
     }
     
     // The initializer to set up the game with pairs of cards.
@@ -40,7 +58,7 @@ struct MemoryGame<CardContent> {
     
     // The internal Card structure describes card properties.
     struct Card: Identifiable {
-        var isFaceUp: Bool = true
+        var isFaceUp: Bool = false
         var isMatched: Bool = false
         var content: CardContent
         var id: Int
