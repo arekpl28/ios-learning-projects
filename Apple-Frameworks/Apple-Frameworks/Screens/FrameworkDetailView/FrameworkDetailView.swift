@@ -16,19 +16,7 @@ struct FrameworkDetailView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer ()
-                // Close Button
-                Button {
-                    // Action to dismiss the view
-                    isShowingDetailView = false
-                } label: {
-                    Image(systemName: "xmark")
-                        .foregroundColor(Color(.label))
-                        .imageScale(.large)
-                        .frame(width: 44, height: 44)
-                }
-            }.padding(.horizontal)
+            XDismissButton(isShowingDetailView: $isShowingDetailView)
             
             Spacer()
             // Display the framework title
@@ -50,7 +38,7 @@ struct FrameworkDetailView: View {
                 // Present SafariView with the framework's URL
                 SafariView(url: URL(string: framework.urlString) ?? URL(string: "apple.com")!)
             })
-            
+
         }
     }
 }

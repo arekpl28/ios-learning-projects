@@ -17,4 +17,8 @@ final class FrameworkGridViewModel: ObservableObject {
     }
     // Published property to track if the detail view should be shown
     @Published  var isShowingDetailView = false
+    // Define grid columns
+    let columns: [GridItem] = [GridItem(.flexible()),
+                               GridItem(.flexible()),
+                               GridItem(.flexible())]
 }
