@@ -11,6 +11,8 @@ struct FrameworkDetailView: View {
     var framework: Framework
     // Binding to control the detail view's presentation
     @Binding var isShowingDetailView: Bool
+    // State to control SafariView presentation
+    @State private var isShowingSafariView = false
     
     var body: some View {
         VStack {
@@ -40,9 +42,15 @@ struct FrameworkDetailView: View {
             // "Learn More" Button
             Button {
                 // Action to navigate to more information
+                isShowingSafariView = true
             } label: {
                 AFButton(title: "Learn More")
             }
+            .sheet(isPresented: $isShowingSafariView, content: {
+                // Present SafariView with the framework's URL
+                SafariView(url: URL(string: framework.urlString) ?? URL(string: "apple.com")!)
+            })
+            
         }
     }
 }
