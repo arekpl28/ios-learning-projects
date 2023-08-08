@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct FrameworkGridView: View {
+    // View model responsible for managing framework selection and detail view state
+    @StateObject var viewModel = FrameworkGridViewModel()
+    
     // Define grid columns
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
@@ -21,11 +24,17 @@ struct FrameworkGridView: View {
                     ForEach(MockData.frameworks) {framework in
                         // Display each framework's title using FrameworkTitleView
                         FrameworkTitleView(framework: framework)
+                            .onTapGesture {
+                                viewModel.selectedFramework = framework
+                            }
                     }
                 }
             }
             .navigationTitle("🍎 Frameworks") // Navigation title
-            
+            // Present the detail view as a sheet when isShowingDetailView is true
+            .sheet(isPresented: $viewModel.isShowingDetailView){
+                FrameworkDetailView(framework:  viewModel.selectedFramework ?? MockData.sampleFramework, isShowingDetailView: $viewModel.isShowingDetailView)
+            }
         }
     }
 }
