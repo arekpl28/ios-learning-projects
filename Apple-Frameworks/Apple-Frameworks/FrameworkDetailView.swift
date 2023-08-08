@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FrameworkDetailView: View {
     var framework: Framework
+    // Binding to control the detail view's presentation
+    @Binding var isShowingDetailView: Bool
     
     var body: some View {
         VStack {
@@ -17,6 +19,7 @@ struct FrameworkDetailView: View {
                 // Close Button
                 Button {
                     // Action to dismiss the view
+                    isShowingDetailView = false
                 } label: {
                     Image(systemName: "xmark")
                         .foregroundColor(Color(.label))
@@ -46,6 +49,6 @@ struct FrameworkDetailView: View {
 
 struct FrameworkDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameworkDetailView(framework: MockData.sampleFramework)
+        FrameworkDetailView(framework: MockData.sampleFramework, isShowingDetailView: .constant(false))
     }
 }
