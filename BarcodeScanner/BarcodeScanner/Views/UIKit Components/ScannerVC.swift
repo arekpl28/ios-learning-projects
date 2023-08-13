@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+
 // Enum to represent possible errors related to camera usage
 enum CameraError {
     case invalidDeviceInput
@@ -21,15 +22,18 @@ protocol ScannerVCDelegate: AnyObject {
 
 // The main class for barcode scanning
 final class ScannerVC: UIViewController {
+    
     // AVCaptureSession for managing the camera input and output
     let captureSession = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer?
     weak var scannerDelegate: ScannerVCDelegate?
+    
     // Initializer with a delegate
     init(scannerDelegate: ScannerVCDelegate) {
         super.init(nibName: nil, bundle: nil)
         self.scannerDelegate = scannerDelegate
     }
+    
     // Required initializer for UIViewController
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
@@ -50,6 +54,7 @@ final class ScannerVC: UIViewController {
         
         previewLayer.frame = view.layer.bounds
     }
+    
     // Set up the capture session, camera input, and metadata output
     private func setupCaptureSession() {
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
@@ -88,12 +93,13 @@ final class ScannerVC: UIViewController {
         previewLayer!.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer!)
         
-        captureSession.startRunning()
+            captureSession.startRunning()
     }
 }
 
 // Extension for handling AVCaptureMetadataOutputObjectsDelegate
 extension ScannerVC: AVCaptureMetadataOutputObjectsDelegate {
+    
     // Callback when metadata objects are captured
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
