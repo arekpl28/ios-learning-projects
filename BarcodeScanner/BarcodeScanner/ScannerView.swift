@@ -10,6 +10,8 @@ import SwiftUI
 // A SwiftUI representation of ScannerVC
 struct ScannerView: UIViewControllerRepresentable {
     
+    @Binding var scannedCode: String
+    
     // Create and configure the underlying UIViewController
     func makeUIViewController(context: Context) -> ScannerVC {
         ScannerVC(scannerDelegate: context.coordinator)
@@ -20,13 +22,20 @@ struct ScannerView: UIViewControllerRepresentable {
     
     // Create the Coordinator to act as a bridge between SwiftUI and ScannerVC
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(scannerView: self)
     }
     
     // Coordinator class to handle delegate methods from ScannerVC
     final class Coordinator: NSObject, ScannerVCDelegate {
+        
+        private let scannerView: ScannerView
+        
+        init(scannerView: ScannerView) {
+            self.scannerView = scannerView
+        }
+        
         func didFind(barcode: String) {
-            print(barcode)
+            scannerView.scannedCode = barcode
         }
         
         // Handle camera-related errors
@@ -38,6 +47,6 @@ struct ScannerView: UIViewControllerRepresentable {
 
 struct ScannerView_Previews: PreviewProvider {
     static var previews: some View {
-        ScannerView()
+        ScannerView(scannedCode: .constant("123456"))
     }
 }
