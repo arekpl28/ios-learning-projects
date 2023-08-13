@@ -32,14 +32,18 @@ struct FrameworkDetailView: View {
                 // Action to navigate to more information
                 isShowingSafariView = true
             } label: {
-                AFButton(title: "Learn More")
+                //                AFButton(title: "Learn More")
+                Label("Learn More", systemImage: "book.fill")
             }
-            .sheet(isPresented: $isShowingSafariView, content: {
-                // Present SafariView with the framework's URL
-                SafariView(url: URL(string: framework.urlString) ?? URL(string: "apple.com")!)
-            })
-
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+            .tint(.red)
+            
         }
+        .sheet(isPresented: $isShowingSafariView, content: {
+            // Present SafariView with the framework's URL
+            SafariView(url: URL(string: framework.urlString) ?? URL(string: "apple.com")!)
+        })
     }
 }
 
