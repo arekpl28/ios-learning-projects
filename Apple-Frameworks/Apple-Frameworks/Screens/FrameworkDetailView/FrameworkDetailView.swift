@@ -9,16 +9,12 @@ import SwiftUI
 
 struct FrameworkDetailView: View {
     var framework: Framework
-    // Binding to control the detail view's presentation
-    @Binding var isShowingDetailView: Bool
+
     // State to control SafariView presentation
     @State private var isShowingSafariView = false
     
     var body: some View {
         VStack {
-            XDismissButton(isShowingDetailView: $isShowingDetailView)
-            
-            Spacer()
             // Display the framework title
             FrameworkTitleView(framework: framework)
             // Display the framework description
@@ -49,6 +45,6 @@ struct FrameworkDetailView: View {
 
 struct FrameworkDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameworkDetailView(framework: MockData.sampleFramework, isShowingDetailView: .constant(false))
+        FrameworkDetailView(framework: MockData.sampleFramework)
     }
 }
