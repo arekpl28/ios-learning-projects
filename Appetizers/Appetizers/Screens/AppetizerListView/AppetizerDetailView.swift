@@ -9,11 +9,12 @@ import SwiftUI
 
 struct AppetizerDetailView: View {
     
+    @EnvironmentObject var order: Order
+    
     let appetizer: Appetizer
     @Binding var isShowingDetail: Bool
     
     var body: some View {
-        
         VStack {
             AppetizerRemoteImage(urlString: appetizer.imageURL)
                 .aspectRatio(contentMode: .fit)
@@ -39,7 +40,8 @@ struct AppetizerDetailView: View {
             Spacer()
             
             Button {
-                print("ok")
+                order.add(appetizer)
+                isShowingDetail = false
             } label: {
                 APButton(title: "$\(appetizer.price, specifier: "%.2f") - Add To Order")
             }
