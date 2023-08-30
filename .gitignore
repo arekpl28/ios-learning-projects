@@ -22,6 +22,7 @@ xcuserdata/
 ##### new
 Contents.json
 project.pbxproj
+*.entitlements
 
 # CocoaPods
 Pods/
