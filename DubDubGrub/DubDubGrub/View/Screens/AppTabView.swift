@@ -13,20 +13,23 @@ struct AppTabView: View {
             LocationMapView()
                 .tabItem {
                     Label("Map", systemImage: "map")
-                        .environment(\.symbolVariants, .none)
+                        .environment(\.symbolVariants,
+                                      .none)
                 }
+            
             LocationListView()
                 .tabItem {
                     Label("Location", systemImage: "building")
                         .environment(\.symbolVariants, .none)
                 }
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person")
-                        .environment(\.symbolVariants, .none)
-                }
-        }
-        .tint(.brandPrimary)
+            
+            NavigationView {
+                ProfileView()
+            }.tabItem {
+                Label("Profile", systemImage: "person")
+                    .environment(\.symbolVariants, .none)
+            }
+        }.tint(.brandPrimary)
     }
 }
 
