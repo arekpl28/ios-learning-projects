@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct LocationListView: View {
+    
+    @State private var location: [DDGLocation] = [DDGLocation(record: MockData.location)]
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(0..<10){_ in
-                    NavigationLink(destination: LocationDetailView()) {
-                        LocationCell()
+                ForEach(location, id: \.ckRecordID){ location in
+                    NavigationLink(destination: LocationDetailView(location: location)) {
+                        LocationCell(location: location)
                     }
                 }
             }.navigationTitle("Grub Spots")
