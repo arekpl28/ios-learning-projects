@@ -20,8 +20,8 @@ struct DDGLocation {
     let ckRecordID: CKRecord.ID
     let name: String
     let description: String
-    let squareAsset: CKAsset
-    let bannerAsset: CKAsset
+    let squareAsset: CKAsset!
+    let bannerAsset: CKAsset!
     let address: String
     let location: CLLocation
     let websiteURL: String
@@ -31,8 +31,8 @@ struct DDGLocation {
         ckRecordID  = record.recordID
         name        = record[DDGLocation.kName] as? String ?? "N/A"
         description = record[DDGLocation.kDescription] as? String ?? "N/A"
-        squareAsset = record[DDGLocation.kSquareAsset] as! CKAsset
-        bannerAsset = record[DDGLocation.kBannerAsset] as! CKAsset
+        squareAsset = record[DDGLocation.kSquareAsset] as? CKAsset
+        bannerAsset = record[DDGLocation.kBannerAsset] as? CKAsset
         address     = record[DDGLocation.kAddress] as? String ?? "N/A"
         location    = record[DDGLocation.kLocation] as? CLLocation ?? CLLocation(latitude: 0, longitude: 0)
         websiteURL  = record[DDGLocation.kWebsiteURL] as? String ?? "N/A"
