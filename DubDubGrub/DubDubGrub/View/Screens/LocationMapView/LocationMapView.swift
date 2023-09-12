@@ -9,12 +9,14 @@ import SwiftUI
 import MapKit
 
 struct LocationMapView: View {
-    
+    @EnvironmentObject private var locationManager: LocationManager
     @StateObject private var viewModel = LocationMapViewModel()
     
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $viewModel.region).edgesIgnoringSafeArea(.top)
+            Map(coordinateRegion: $viewModel.region, annotationItems: locationManager.locations) { location in
+                MapMarker(coordinate: location.location.coordinate, tint: .brandPrimary)
+            }.edgesIgnoringSafeArea(.top)
             
             VStack {
                 LogoView(logoName: "ddg-map-logo").shadow(radius: 10)
@@ -28,7 +30,9 @@ struct LocationMapView: View {
             
         })
         .onAppear {
-            viewModel.getLocations()
+            if locationManager.locations.isEmpty {
+                viewModel.getLocations(for: locationManager)
+            }
         }
     }
 }
