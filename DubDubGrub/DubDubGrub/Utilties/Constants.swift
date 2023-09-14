@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum LogoImage {
+    static let logo = "ddg-map-logo"
+}
+
 enum RecordType {
     static let location = "DDGLocation"
     static let profile = "DDGProfile"
