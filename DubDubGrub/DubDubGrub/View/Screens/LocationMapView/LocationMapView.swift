@@ -21,7 +21,8 @@ struct LocationMapView: View {
             .edgesIgnoringSafeArea(.top)
             
             VStack {
-                LogoView(logoName: "ddg-map-logo").shadow(radius: 10)
+                LogoView(logoName: LogoImage.logo, frameWidth: 125)
+                    .shadow(radius: 10)
                 Spacer ()
             }
         }
@@ -43,17 +44,5 @@ struct LocationMapView: View {
 struct LocationMapView_Previews: PreviewProvider {
     static var previews: some View {
         LocationMapView()
-    }
-}
-
-struct LogoView: View {
-    
-    let logoName: String
-    
-    var body: some View {
-        Image(logoName)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: 70)
     }
 }
